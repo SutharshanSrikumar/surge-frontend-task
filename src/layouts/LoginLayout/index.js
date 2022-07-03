@@ -1,11 +1,10 @@
 import { Outlet } from "react-router-dom";
 
-const LoginLayout = () => {
+export default function LoginLayout() {
 
-    return (<>
-            <Outlet />
-    </>
+    return (
+        <Outlet />
     );
 };
 
-export default LoginLayout;
+
