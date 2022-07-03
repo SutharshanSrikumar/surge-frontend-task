@@ -9,11 +9,15 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
+import DetailPopup from '../../components/DetailPopup';
+import SearchBar from '../../components/SearchBar';
+import { Box, Button } from '@mui/material';
 
 export default function UserList() {
   const [page, setPage] = useState(0);
   const [rows, setRows] = useState([]);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [selectedId, setSelectedId] = useState("");
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -24,8 +28,21 @@ export default function UserList() {
     setPage(0);
   };
 
+  const handleSearch = async (searchKey) => {
+    if (searchKey) {
+    }
+  }
+
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <Box sx={{width:"100%",display:"flex",justifyContent:"space-between",padding:"16px"}}>
+        <Box>
+          <SearchBar handleSearch={handleSearch} />
+        </Box>
+        <Box>
+          <Button variant="contained">New</Button>
+        </Box>
+      </Box>
       <TableContainer >
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -52,7 +69,7 @@ export default function UserList() {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
-                  <TableRow hover key={row.id}>
+                  <TableRow hover key={row.id} onClick={()=>setSelectedId(row.id)}>
                     <TableCell>
                         {row.firstName}
                     </TableCell>
@@ -83,6 +100,7 @@ export default function UserList() {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
+      {selectedId && <DetailPopup setSelectedId={setSelectedId} selectedId={selectedId} />}
     </Paper>
   );
 }
