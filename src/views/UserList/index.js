@@ -12,12 +12,14 @@ import ClearIcon from '@mui/icons-material/Clear';
 import DetailPopup from '../../components/DetailPopup';
 import SearchBar from '../../components/SearchBar';
 import { Box, Button } from '@mui/material';
+import CreateUser from '../../components/CreateUserPopup';
 
 export default function UserList() {
   const [page, setPage] = useState(0);
   const [rows, setRows] = useState([]);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [selectedId, setSelectedId] = useState("");
+  const [newUserPopup, setNewUserPopup] = useState(false);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -40,7 +42,7 @@ export default function UserList() {
           <SearchBar handleSearch={handleSearch} />
         </Box>
         <Box>
-          <Button variant="contained">New</Button>
+          <Button variant="contained" onClick={()=>setNewUserPopup(true)}>New User</Button>
         </Box>
       </Box>
       <TableContainer >
@@ -101,6 +103,7 @@ export default function UserList() {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
       {selectedId && <DetailPopup setSelectedId={setSelectedId} selectedId={selectedId} />}
+      {newUserPopup && <CreateUser setNewUserPopup={setNewUserPopup} />}
     </Paper>
   );
 }

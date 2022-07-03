@@ -35,25 +35,31 @@ export default function Login() {
   }
 
   const handleSubmit = (event) => {
+    let errorCheck = 0;
+
     let errorObj = {
       email:false,
       password:false,
     }
 
-    if(isEmail(state.email)){
-      errorObj.email = false
-    }else{
+    if(!isEmail(state.email)){
+      errorCheck = 1;
       errorObj.email = true
     }
-    if(state.password){
-      errorObj.password = false
-    }else{
+    if(!state.password){
+      errorCheck = 1;
       errorObj.password = true
     }
     
     setError(errorObj)
 
-    if(!errorObj.email && !errorObj.password){
+    if(errorCheck == 0){
+      let postData= {
+        email:state.email,
+        password:state.password,
+      }
+
+      console.log("post Data",postData);
     }
 
   };
@@ -82,7 +88,7 @@ export default function Login() {
               required
               fullWidth
               id="email"
-              label="User Name"
+              label="Email"
               name="email"
               onChange={handleChange}
               autoFocus

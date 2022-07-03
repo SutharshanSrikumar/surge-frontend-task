@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 const SearchBar = ({ handlesearch }) => {
     const classes = useStyles();
     const [state, setState] = useState({
-        searchKey: null
+        searchKey: ""
     })
 
     const handleChange = (event) => {
