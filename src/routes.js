@@ -4,6 +4,7 @@ import DashboardLayout from "./layouts/DashboardLayout";
 import Login from "./views/Login";
 import UserList from "./views/UserList";
 import NotesList from "./views/NotesList";
+import FirstTimeLogin from "./views/FirstTimeLogin";
 
 export const routes = [
 
@@ -21,6 +22,14 @@ export const routes = [
     element: <LoginLayout />,
     children: [
       { index: true, element:  <Login /> },
+      { path: "*", element: <Navigate to="/404" /> },
+    ],
+  },
+  {
+    path: "update-password",
+    element: <LoginLayout />,
+    children: [
+      { index: true, element:  <FirstTimeLogin /> },
       { path: "*", element: <Navigate to="/404" /> },
     ],
   },
