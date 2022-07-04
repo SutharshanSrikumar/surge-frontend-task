@@ -3,7 +3,7 @@ import LoginLayout from "./layouts/LoginLayout";
 import DashboardLayout from "./layouts/DashboardLayout";
 import Login from "./views/Login";
 import UserList from "./views/UserList";
-import NotesList from "./views/UserList";
+import NotesList from "./views/NotesList";
 
 export const routes = [
 
