@@ -7,19 +7,17 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import CheckIcon from '@mui/icons-material/Check';
-import ClearIcon from '@mui/icons-material/Clear';
-import DetailPopup from '../../components/DetailPopup';
+import EditIcon from '@mui/icons-material/Edit';
 import SearchBar from '../../components/SearchBar';
 import { Box, Button } from '@mui/material';
-import CreateUser from '../../components/CreateUserPopup';
+import AddEditNotesPopup from '../../components/AddEditNotesPopup';
 
-export default function UserList() {
+export default function NotesList() {
   const [page, setPage] = useState(0);
-  const [rows, setRows] = useState([]);
+  const [rows, setRows] = useState([{title:"hiii",description:"Good"}]);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [selectedId, setSelectedId] = useState("");
-  const [newUserPopup, setNewUserPopup] = useState(false);
+  const [notesPopup, setNotesPopup] = useState(false);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -35,6 +33,14 @@ export default function UserList() {
     }
   }
 
+  const handleEdit = (id) => {
+    console.log("hhhh ",id);
+    if (id) {
+      setSelectedId(id)
+      setNotesPopup(true)
+    }
+  }
+
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <Box sx={{width:"100%",display:"flex",justifyContent:"space-between",padding:"16px"}}>
@@ -42,7 +48,7 @@ export default function UserList() {
           <SearchBar handleSearch={handleSearch} />
         </Box>
         <Box>
-          <Button variant="contained" onClick={()=>setNewUserPopup(true)}>New User</Button>
+          <Button variant="contained" onClick={()=>setNotesPopup(true)}>New Note</Button>
         </Box>
       </Box>
       <TableContainer >
@@ -50,42 +56,36 @@ export default function UserList() {
           <TableHead>
             <TableRow>
                 <TableCell>
-                    First Name
+                    No
                 </TableCell>
                 <TableCell>
-                    Last Name
+                    Title
                 </TableCell>
                 <TableCell>
-                    Email
+                    Description
                 </TableCell>
                 <TableCell>
-                    Account Type
-                </TableCell>
-                <TableCell>
-                    Status
+                    Action
                 </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
+              .map((row,index) => {
                 return (
-                  <TableRow hover key={row.id} onClick={()=>setSelectedId(row.id)}>
+                  <TableRow hover key={row.id} onClick={()=>handleEdit(row.id)}>
                     <TableCell>
-                        {row.firstName}
+                        {index + 1}
                     </TableCell>
                     <TableCell>
-                        {row.lastName}
+                        {row.title}
                     </TableCell>
                     <TableCell>
-                        {row.email}
+                        {row.description}
                     </TableCell>
                     <TableCell>
-                        {row.accountType}
-                    </TableCell>
-                    <TableCell>
-                        {row.status ? <CheckIcon htmlColor="green" /> : <ClearIcon htmlColor="red"/>}
+                        <EditIcon color="primary" sx={{cursor:"pointer"}} onClick={()=>handleEdit(row.id)} />
                     </TableCell>
                   </TableRow>
                 );
@@ -102,8 +102,7 @@ export default function UserList() {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-      {selectedId && <DetailPopup setSelectedId={setSelectedId} selectedId={selectedId} />}
-      {newUserPopup && <CreateUser setNewUserPopup={setNewUserPopup} />}
+      {notesPopup && <AddEditNotesPopup setNotesPopup={setNotesPopup} setSelectedId={setSelectedId} selectedId={selectedId} />}
     </Paper>
   );
 }

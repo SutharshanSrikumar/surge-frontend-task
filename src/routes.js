@@ -3,6 +3,7 @@ import LoginLayout from "./layouts/LoginLayout";
 import DashboardLayout from "./layouts/DashboardLayout";
 import Login from "./views/Login";
 import UserList from "./views/UserList";
+import NotesList from "./views/UserList";
 
 export const routes = [
 
@@ -11,6 +12,7 @@ export const routes = [
     element: <DashboardLayout />,
     children: [
       { path: "users", element: <UserList /> },
+      { path: "notes", element: <NotesList /> },
       { path: "*", element: <Navigate to="/404" /> },
     ],
   },
