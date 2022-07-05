@@ -6,14 +6,22 @@ import UserList from "./views/UserList";
 import NotesList from "./views/NotesList";
 import FirstTimeLogin from "./views/FirstTimeLogin";
 
-export const routes = [
+const adminRoutes = (isLoggedIn) => {
+  return isLoggedIn === "ADMIN";
+};
+
+const studentRoutes = (isLoggedIn) => {
+  return isLoggedIn === "STUDENT";
+};
+
+export const routes = (isLoggedIn) => [
 
   {
     path: "app",
-    element: <DashboardLayout />,
+    element: isLoggedIn ? <DashboardLayout /> : <Navigate to="/login" />,
     children: [
-      { path: "users", element: <UserList /> },
-      { path: "notes", element: <NotesList /> },
+      { path: "users", element: isLoggedIn && adminRoutes ? <UserList /> : <Navigate to="/login" />},
+      { path: "notes", element: isLoggedIn && studentRoutes ? <NotesList /> : <Navigate to="/login" /> },
       { path: "*", element: <Navigate to="/404" /> },
     ],
   },

@@ -1,9 +1,12 @@
 import './App.css';
 import { routes } from "./routes";
 import { useRoutes } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 function App() {
-  const routing = useRoutes(routes);
+  const auth = useSelector((state) => state.auth);
+  const isLoggedIn = auth?.accountType?.toUpperCase() || false;
+  const routing = useRoutes(routes(isLoggedIn));
 
   return (
     <div className="App">
@@ -13,5 +16,3 @@ function App() {
 }
 
 export default App;
-
-

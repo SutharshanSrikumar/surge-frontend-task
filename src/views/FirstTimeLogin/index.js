@@ -83,7 +83,7 @@ export default function FirstTimeLogin() {
           <Typography component="h1" variant="h5">
             Setup New Password
           </Typography>
-          <Box component="jhh" sx={{ mt: 1 }}>
+          <Box sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
