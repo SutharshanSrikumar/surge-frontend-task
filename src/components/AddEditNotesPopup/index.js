@@ -50,10 +50,13 @@ BootstrapDialogTitle.propTypes = {
 
 export default function AddEditNotesPopup({setNotesPopup , setSelectedId, selectedId}) {
   const [open, setOpen] = React.useState(true);
-  const [state,setState] = useState({
-    title:"",
-    description:"",
-  })
+        // need to change after api integration
+
+  // const [state,setState] = useState({
+  //   title:"",
+  //   description:"",
+  // })
+  const [state,setState] = useState( { "id":2, "title": "Title1", "description": "Desc"})
   const [error,setError] = useState({
     title:false,
     description:false,
@@ -96,7 +99,8 @@ export default function AddEditNotesPopup({setNotesPopup , setSelectedId, select
           title:state.title,
           description:state.description,
         }
-
+        // need to change after api integration
+        handleClose()
         console.log("post Data",postData);
     }
     

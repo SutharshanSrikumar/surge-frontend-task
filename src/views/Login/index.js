@@ -51,34 +51,46 @@ export default function Login() {
         dispatch(
           alertNotification("Welcome Back " + payload?.firstName, "success")
         );
-        let user = {
-          userId: payload?.userId,
-          email: payload?.email,
-          firstName: payload?.firstName || '',
-          lastName: payload?.lastName || '',
-          mobile: payload?.mobile || '',
-          dateOfBirth: payload?.dateOfBirth || '',
-          status: payload?.status,
-          accountType: payload?.accountType || 1,
-          userAccessToken: payload?.accessToken
-        };
+        if(payload.firstTime){
+          let user = {
+            userId: payload?.userId,
+            email: payload?.email,
+            firstName: payload?.firstName || '',
+            lastName: payload?.lastName || '',
+            mobile: payload?.mobile || '',
+            dateOfBirth: payload?.dateOfBirth || '',
+            status: payload?.status,
+            accountType: payload?.accountType || 1,
+            firstTime: payload?.firstTime,
+            userAccessToken: payload?.accessToken
+          };
+  
+          localStorage.setItem("userAuthDetail", JSON.stringify(user));
+          if(payload.accountType === 1){
+            navigate("/app/notes");
+          }
+          else{
+            navigate("/app/users");
+          }
 
-        localStorage.setItem("userAuthDetail", JSON.stringify(user));
-
-        if(!payload?.status){
-          navigate("/app/update-password");
         }
         else{
-          navigate("/app/users");
+          navigate("/app/update-password");
         }
       }
     }
 
     if (type === AuthConstant.LOGINFAIL) {
       setSubmitLoader(false);
+      // need to change after api integration
+      // dispatch(
+      //   alertNotification(error ? error : "Invalid username or password", "fail")
+      // );
+
       dispatch(
-        alertNotification(error ? error : "Invalid username or password", "fail")
+        alertNotification("Login Success ", "success")
       );
+      navigate("/update-password");
     }
   }, [auth]);
 
@@ -165,6 +177,7 @@ export default function Login() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
               onClick={handleSubmit}
+              disabled={submitLoader}
             >
               Sign In
             </Button>

@@ -129,6 +129,8 @@ export default function CreateUser({setNewUserPopup}) {
           accountType:state.accountType,
         }
 
+        // need to change after api integration
+        handleClose()
         console.log("post Data",postData);
     }
     

@@ -1,4 +1,4 @@
-import React ,{useEffect,useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -16,7 +16,19 @@ import CreateUser from '../../components/CreateUserPopup';
 
 export default function UserList() {
   const [page, setPage] = useState(0);
-  const [rows, setRows] = useState([]);
+  // need to change after api integration
+  // const [rows, setRows] = useState([]);
+  const [rows, setRows] = useState([{
+    "id": 1,
+    "firstName": "Test",
+    "lastName": "abc",
+    "email": "abc@gmail.com",
+    "dateOfBirth": "2003-05-08",
+    "mobile": "0771458476",
+    "accountType": "1",
+    "status": false,
+    "firstTime": true
+  }]);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [selectedId, setSelectedId] = useState("");
   const [newUserPopup, setNewUserPopup] = useState(false);
@@ -37,33 +49,33 @@ export default function UserList() {
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <Box sx={{width:"100%",display:"flex",justifyContent:"space-between",padding:"16px"}}>
+      <Box sx={{ width: "100%", display: "flex", justifyContent: "space-between", padding: "16px" }}>
         <Box>
           <SearchBar handleSearch={handleSearch} />
         </Box>
         <Box>
-          <Button variant="contained" onClick={()=>setNewUserPopup(true)}>New User</Button>
+          <Button variant="contained" onClick={() => setNewUserPopup(true)}>New User</Button>
         </Box>
       </Box>
       <TableContainer >
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-                <TableCell>
-                    First Name
-                </TableCell>
-                <TableCell>
-                    Last Name
-                </TableCell>
-                <TableCell>
-                    Email
-                </TableCell>
-                <TableCell>
-                    Account Type
-                </TableCell>
-                <TableCell>
-                    Status
-                </TableCell>
+              <TableCell>
+                First Name
+              </TableCell>
+              <TableCell>
+                Last Name
+              </TableCell>
+              <TableCell>
+                Email
+              </TableCell>
+              <TableCell>
+                Account Type
+              </TableCell>
+              <TableCell>
+                Status
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -71,21 +83,21 @@ export default function UserList() {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
-                  <TableRow hover key={row.id} onClick={()=>setSelectedId(row.id)}>
+                  <TableRow hover style={{cursor:"pointer"}} key={row.id} onClick={() => setSelectedId(row.id)}>
                     <TableCell>
-                        {row.firstName}
+                      {row.firstName}
                     </TableCell>
                     <TableCell>
-                        {row.lastName}
+                      {row.lastName}
                     </TableCell>
                     <TableCell>
-                        {row.email}
+                      {row.email}
                     </TableCell>
                     <TableCell>
-                        {row.accountType}
+                      {row.accountType}
                     </TableCell>
                     <TableCell>
-                        {row.status ? <CheckIcon htmlColor="green" /> : <ClearIcon htmlColor="red"/>}
+                      {row.status ? <CheckIcon htmlColor="green" /> : <ClearIcon htmlColor="red" />}
                     </TableCell>
                   </TableRow>
                 );

@@ -74,11 +74,11 @@ export default function DashboardLayout() {
         <Toolbar />
         <div className={classes.drawerContainer}>
           <List>
-            <ListItem button>
+            <ListItem button onClick={()=>navigate("/app/users")}>
               <ListItemIcon><PeopleAltIcon /></ListItemIcon>
               <ListItemText primary={"Users"} />
             </ListItem>
-            <ListItem button>
+            <ListItem button onClick={()=>navigate("/app/notes")}>
               <ListItemIcon><LibraryBooksIcon /></ListItemIcon>
               <ListItemText primary={"Notes"} />
             </ListItem>

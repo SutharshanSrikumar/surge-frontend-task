@@ -6,7 +6,9 @@ import { useSelector } from 'react-redux';
 function App() {
   const auth = useSelector((state) => state.auth);
   const isLoggedIn = auth?.accountType?.toUpperCase() || false;
-  const routing = useRoutes(routes(isLoggedIn));
+  // need to change after api integration
+  // const routing = useRoutes(routes(isLoggedIn));
+  const routing = useRoutes(routes(true));
 
   return (
     <div className="App">

@@ -12,10 +12,11 @@ import SearchBar from '../../components/SearchBar';
 import { Box, Button } from '@mui/material';
 import AddEditNotesPopup from '../../components/AddEditNotesPopup';
 
-
 export default function NotesList() {
   const [page, setPage] = useState(0);
-  const [rows, setRows] = useState([]);
+  // need to change after api integration
+  // const [rows, setRows] = useState([]);
+  const [rows, setRows] = useState([ { "id":2, "title": "Title1", "description": "Desc"}]);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [selectedId, setSelectedId] = useState("");
   const [notesPopup, setNotesPopup] = useState(false);
